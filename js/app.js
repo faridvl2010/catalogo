@@ -66,6 +66,7 @@ $("#tablaProductos").on("click", ".eliminar", function () {
 });
 
 $("#agregar").click(() => {
+  if (!validarFormulario()) return;
   const nombre = $("#nombre").val();
   const descripcion = $("#descripcion").val();
   const precio = parseFloat($("#precio").val());
@@ -74,6 +75,7 @@ $("#agregar").click(() => {
 });
 
 $("#actualizar").click(() => {
+  if (!validarFormulario()) return;
   const id = $("#id").val();
   const nombre = $("#nombre").val();
   const descripcion = $("#descripcion").val();
@@ -114,6 +116,35 @@ $("#exportar").click(() => {
   link.download = "productos.csv";
   link.click();
 });
+
+function validarFormulario() {
+  const nombre = $("#nombre").val().trim();
+  const descripcion = $("#descripcion").val().trim();
+  const precio = parseFloat($("#precio").val());
+  const cantidad = parseInt($("#cantidad").val());
+
+  if (nombre === "" || isNaN(precio) || isNaN(cantidad)) {
+    alert("Por favor, complete todos los campos obligatorios.");
+    return false;
+  }
+
+  if (precio < 0 || cantidad < 0) {
+    alert("El precio y la cantidad no pueden ser negativos.");
+    return false;
+  }
+
+  if (nombre.length > 100) {
+    alert("El nombre no puede tener más de 100 caracteres.");
+    return false;
+  }
+
+  if (descripcion.length > 255) {
+    alert("La descripción no puede tener más de 255 caracteres.");
+    return false;
+  }
+
+  return true;
+}
 
 
 $(document).ready(cargarProductos);
