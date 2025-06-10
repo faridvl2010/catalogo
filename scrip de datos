@@ -1,0 +1,16 @@
+INSERT INTO productos (nombre, descripcion, precio, cantidad) VALUES
+('Teclado Mecánico', 'Teclado con retroiluminación RGB', 150.00, 25),
+('Mouse Gamer', 'Mouse óptico con 6 botones programables', 75.50, 50),
+('Monitor LED 24"', 'Monitor Full HD con panel IPS', 299.99, 12),
+('Memoria RAM 16GB', 'Memoria DDR4 de alto rendimiento', 120.00, 30),
+('Disco SSD 512GB', 'Unidad de estado sólido SATA III', 98.00, 40),
+('Auriculares Bluetooth', 'Audífonos inalámbricos con micrófono', 65.90, 18),
+('Webcam HD', 'Cámara web 1080p con autofoco', 49.99, 20),
+('Impresora Multifuncional', 'Impresora con escáner y fotocopiadora', 215.75, 10),
+('Silla Ergonómica', 'Silla para oficina con soporte lumbar', 320.00, 5),
+('Router WiFi 6', 'Router de alta velocidad con 4 antenas', 89.99, 15),
+('Hub USB 3.0', 'Concentrador de 4 puertos USB 3.0', 29.90, 35),
+('Disco Duro 1TB', 'Disco duro externo portátil USB 3.0', 79.50, 28),
+('Lámpara LED Escritorio', 'Lámpara con brazo flexible y 3 niveles de luz', 22.00, 60),
+('Cable HDMI 2m', 'Cable HDMI de alta velocidad 2 metros', 9.99, 100),
+('Soporte para Laptop', 'Base metálica ajustable para laptops', 35.00, 45);

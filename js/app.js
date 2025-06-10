@@ -91,4 +91,5 @@ $("#exportar").click(() => {
   link.click();
 });
 
+
 $(document).ready(cargarProductos);
