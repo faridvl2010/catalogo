@@ -4,10 +4,24 @@ let orden = { campo: "", asc: true };
 function renderTabla(data) {
   const tbody = $("#tablaProductos tbody").empty();
   data.forEach(p => {
-    const alerta = p.cantidad < 5 ? 'style="background-color: #ffd1d1;"' : '';
-    tbody.append(`<tr data-id="${p.id}" ${alerta}>
-      <td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion || ""}</td><td>${p.precio}</td><td>${p.cantidad}</td>
-    </tr>`);
+    const alerta = p.cantidad < 5 ? 'table-danger' : '';
+    tbody.append(`
+      <tr data-id="${p.id}" class="${alerta}">
+        <td>${p.id}</td>
+        <td>${p.nombre}</td>
+        <td>${p.descripcion || ""}</td>
+        <td>${p.precio}</td>
+        <td>${p.cantidad}</td>
+        <td>
+          <button class="btn btn-sm btn-warning editar">Editar
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger eliminar">Eliminar
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    `);
   });
 }
 
@@ -33,6 +47,23 @@ function aplicarBusquedaOrden() {
   }
   renderTabla(resultado);
 }
+// Evento para botón de editar
+$("#tablaProductos").on("click", ".editar", function () {
+  const fila = $(this).closest("tr").children("td");
+  $("#id").val(fila.eq(0).text());
+  $("#nombre").val(fila.eq(1).text());
+  $("#descripcion").val(fila.eq(2).text());
+  $("#precio").val(fila.eq(3).text());
+  $("#cantidad").val(fila.eq(4).text());
+});
+
+// Evento para botón de eliminar
+$("#tablaProductos").on("click", ".eliminar", function () {
+  const id = $(this).closest("tr").data("id");
+  if (confirm("¿Estás seguro de eliminar este producto?")) {
+    $.post("controller/ProductoController.php?action=eliminar", { id }, cargarProductos);
+  }
+});
 
 $("#agregar").click(() => {
   const nombre = $("#nombre").val();
@@ -56,14 +87,7 @@ $("#eliminar").click(() => {
   $.post("controller/ProductoController.php?action=eliminar", {id}, cargarProductos);
 });
 
-$("#tablaProductos").on("click", "tr", function() {
-  const fila = $(this).children("td");
-  $("#id").val(fila.eq(0).text());
-  $("#nombre").val(fila.eq(1).text());
-  $("#descripcion").val(fila.eq(2).text());
-  $("#precio").val(fila.eq(3).text());
-  $("#cantidad").val(fila.eq(4).text());
-});
+
 
 $("#buscar").on("input", aplicarBusquedaOrden);
 
